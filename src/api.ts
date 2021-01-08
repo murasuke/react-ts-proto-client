@@ -6,6 +6,7 @@ async function request( path: string, config={} ){
     return response.data;
 }
 
+
 export async function getSearchResults(arg: any = {}){
     return request(`/search?key=${arg.key}`);
 
@@ -26,5 +27,10 @@ export async function getSearchResults(arg: any = {}){
 
 export async function postPage1( postData: { [index: string]: string}) {
     const response = await axios.post("page1", postData);
+    return response;
+}
+
+export async function postPage2( postData: { [index: string]: string}) {
+    const response = await axios.post("page2", postData);
     return response;
 }

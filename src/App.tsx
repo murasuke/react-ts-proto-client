@@ -1,14 +1,14 @@
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { TopMenu } from "./pages/TopMenu";
 import { Page1 } from "./pages/Page1/Page1";
-import { Page2 } from "./pages/Page2";
+import { Page2 } from "./pages/Page2/Page2";
 import './App.css';
 
 function App() {
   return (
     <Router>
       <div className="App">
-        <header>header</header>
+        <header><h2>header</h2></header>
         <div className="main-container">
           <main className="content">
             <Switch>
@@ -20,7 +20,7 @@ function App() {
           <nav className="side-nav">nav</nav>
           <aside className="side-bar">side</aside>
         </div>
-        <footer>footer</footer>
+        <footer><h3>footer</h3></footer>
       </div>      
     </Router>
   );

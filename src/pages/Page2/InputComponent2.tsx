@@ -1,21 +1,21 @@
-import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import React, { useState, useEffect, useContext } from 'react';
+import { Page2Context } from './page2Reducer';
 
 export type InputPropsType = {
   id:string, 
   title: string, 
   message:string,
-  // handleChange: (e: {name:string, value: string, e?: React.ChangeEvent<HTMLInputElement>}) => void
-  handleChange: (e: { [index:string]: string }) => void
 }
 
 export function InputComponent1(props: InputPropsType){
     const [checked, setChecked] = useState(true);
+    const { state, dispatch } = useContext(Page2Context);
+
     const message = checked?(''):(<> {props.message}</>);
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement> ) =>{
       setChecked(e.target.value === "1");
-      props.handleChange({ [e.target.name]: e.target.value });
+      dispatch ({ type: "CHANGE_VALUE", name: e.target.name, value: e.target.value });
     }
 
     return (
@@ -30,23 +30,27 @@ export function InputComponent1(props: InputPropsType){
     ); 
 }
 
+/**
+ * 
+ * @param props 
+ */
 export function InputComponent2(props: InputPropsType){
   const [checked, setChecked] = useState(true);
   const [inputText, setInputText] = useState("");
+  const { state, dispatch } = useContext(Page2Context);
 
   const handleRadioChange = (e: React.ChangeEvent<HTMLInputElement> ) =>{
     setChecked(e.target.value === "1");
+    dispatch ({ type: "CHANGE_VALUE", name: e.target.name, value: e.target.value });
     if(e.target.value === "1"){ 
       setInputText("");
-      props.handleChange({ [e.target.name]: e.target.value, [`text_${props.id}`]: "" });
-    } else{
-      props.handleChange({ [e.target.name]: e.target.value });
+      dispatch ({ type: "CLEAR_VALUE",  name: `text_${props.id}`, value: "" });
     }    
   }
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement> ) =>{
-    setInputText(e.target.value); 
-    props.handleChange({ [e.target.name]: e.target.value });
+    setInputText(e.target.value);
+    dispatch ({ type: "CHANGE_VALUE", name: e.target.name, value: e.target.value });
   }
 
   const message = checked?(''):(<> <input type="text" name={`text_${props.id}`} onChange={handleInputChange} value={inputText} ></input> </>);
