@@ -32,6 +32,7 @@ export function TopMenu(){
           <div>        
             <p><Link to="/Page1"><button>Page1</button></Link> サンプル１：関数コンポーネント＋Hookでフォーム入力データをPostするサンプル</p>
             <p><Link to="/Page2"><button>Page2</button></Link> サンプル２：上記に加え、useContextでデータ保持してPost(Reduxは未使用)</p>
+            <p><Link to="/Page3"><button>Page3</button></Link> サンプル３：２をMaterial-UIで</p>
           </div>
           <p>
             ■実装済み<br />

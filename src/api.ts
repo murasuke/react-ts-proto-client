@@ -34,3 +34,8 @@ export async function postPage2( postData: { [index: string]: string}) {
     const response = await axios.post("page2", postData);
     return response;
 }
+
+export async function postPage3( postData: { [index: string]: string}) {
+    const response = await axios.post("page3", postData);
+    return response;
+}

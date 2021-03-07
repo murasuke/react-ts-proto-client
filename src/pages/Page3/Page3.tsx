@@ -1,25 +1,26 @@
 import { Link } from "react-router-dom";
-import React , {useEffect, useContext} from 'react';
-import { Page2ContextProvider, Page2Context } from "./page2Reducer"
-import { InputComponent1, InputComponent2 } from "./InputComponent2";
+import React , {useReducer, useContext, useEffect} from 'react';
+import { Button } from "@material-ui/core";
+import { Page3ContextProvider, Page3Context } from "./page3Reducer"
+import { InputComponent1, InputComponent2 } from "./InputComponent3";
 import { SiteContext } from '../../utils/SiteContext';
-import { postPage2 } from "../../api";
+import { postPage3 } from "../../api";
 
 /**
- * ・フォーム全体の入力値(inputData)は、Page1が保持する。
+ * ・フォーム全体の入力値(inputData)は、Page3が保持する。
  * ・useContextフックを使うことで、propsにコールバックを引き渡す必要はない。
  * ・ページとコンポーネントの階層が深くなる場合でも複雑化しない。
  */
-export function Page2() {
+export function Page3() {
   return (
     <>
       <h3>Page2</h3>
       <ul>
         <li><Link to="/">TopMenu</Link></li>
       </ul>
-      <Page2ContextProvider>
-        <Page2Form />
-      </Page2ContextProvider>
+      <Page3ContextProvider>
+        <Page3Form />
+      </Page3ContextProvider>
     </>
   )
 }
@@ -28,22 +29,25 @@ export function Page2() {
  * contextを利用するためにはコンポーネントをProvider内部に配置する必要があるため、
  * Formを切り出してContextを利用する
  */
-function Page2Form() {
-  const { state, dispatch } = useContext(Page2Context);
+function Page3Form() {
+  const { state, dispatch } = useContext(Page3Context);
   const { dispatch: siteDispatch } = useContext(SiteContext);
+
   useEffect( () => {
-    siteDispatch({ type: "CHANGE_PAGE_NAME", strValue: "Page2", numValue: 0 });
+    siteDispatch({ type: "CHANGE_PAGE_NAME", strValue: "Page3", numValue: 0 });
   },[]);
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     console.log(state);
-    alert(JSON.stringify(state, null, "\t"));
+    // alert(JSON.stringify(state, null, "\t"));
+    siteDispatch({ type: "CHANGE_USER", strValue: "userPage3", numValue: 333 });
 
-    // バックエンドへ送信
-    const response = await postPage2(state);
-    if (response.status !== 200) {
-      console.log(response.statusText);
-    }
+    // // バックエンドへ送信
+    // const response = await postPage3(state);
+    // if (response.status !== 200) {
+    //   console.log(response.statusText);
+    // }
   }
 
   return (
@@ -54,13 +58,14 @@ function Page2Form() {
         <InputComponent2 id="id3" title="title3" message="message3" />
         <InputComponent2 id="id4" title="title4" message="message4" />
         <p>
-          <input type="submit" value="登録" />
+          <Button type="submit"  variant="contained"  color="primary">登録</Button>
         </p>
       </form>
       <br />
- * ・フォーム全体の入力値(inputData)は、Page1が保持する。<br />
+ * ・フォーム全体の入力値(inputData)は、Page3が保持する。<br />
  * ・useContextフックを使うことで、propsにコールバックを引き渡す必要はない。<br />
  * ・ページとコンポーネントの階層が深くなる場合でも複雑化しない。<br />
+ * ・Material-UIコンポーネントのサンプル<br />
     </>
   )
 }
