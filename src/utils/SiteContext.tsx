@@ -39,6 +39,7 @@ export const SiteContext = React.createContext({} as {
 export const ContextProvider = (props: any) => {
   const [state, dispatch] = useReducer(reducer, initialState)
   console.log('ContextProvider');
+
   return <SiteContext.Provider value={{state, dispatch}}>
     {props.children}
   </SiteContext.Provider>

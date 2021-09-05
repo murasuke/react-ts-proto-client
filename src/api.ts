@@ -3,6 +3,7 @@ import axios from "axios";
 async function request( path: string, config={} ){
     // const url = `${process.env.REACT_APP_API_ORIGIN}${path}`;
     const response = await axios.get(path, config);
+
     return response.data;
 }
 
@@ -27,15 +28,18 @@ export async function getSearchResults(arg: any = {}){
 
 export async function postPage1( postData: { [index: string]: string}) {
     const response = await axios.post("page1", postData);
+
     return response;
 }
 
 export async function postPage2( postData: { [index: string]: string}) {
     const response = await axios.post("page2", postData);
+
     return response;
 }
 
 export async function postPage3( postData: { [index: string]: string}) {
     const response = await axios.post("page3", postData);
+
     return response;
 }

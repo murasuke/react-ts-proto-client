@@ -29,6 +29,7 @@ export const Page3Context = React.createContext({} as {
 
 export const Page3ContextProvider = (props: any) => {
   const [state, dispatch] = useReducer(reducer, initialState)
+
   return <Page3Context.Provider value={{state, dispatch}}>
     {props.children}
   </Page3Context.Provider>

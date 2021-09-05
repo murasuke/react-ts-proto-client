@@ -32,6 +32,7 @@ export function Page1(){
       console.log(response.statusText);
     }
   }
+
     return (
       <> 
         <h3>Page1</h3>

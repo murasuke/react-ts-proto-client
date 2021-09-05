@@ -49,7 +49,7 @@ export function InputComponent2(props: InputPropsType){
     props.handleChange({ [e.target.name]: e.target.value });
   }
 
-  const message = checked?(''):(<> <input type="text" name={`text_${props.id}`} onChange={handleInputChange} value={inputText} ></input> </>);
+  const message = checked?(''):(<> <input type="text" name={`text_${props.id}`} onChange={handleInputChange} value={inputText}  /> </>);
 
   return (
     <div style={{padding:"10px"}}> 

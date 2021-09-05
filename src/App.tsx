@@ -10,6 +10,7 @@ import './App.css';
 
 function App() {
   const { state } = useContext(SiteContext);
+
   return (
     <Router>
       <div className="App">

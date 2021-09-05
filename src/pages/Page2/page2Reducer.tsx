@@ -29,6 +29,7 @@ export const Page2Context = React.createContext({} as {
 
 export const Page2ContextProvider = (props: any) => {
   const [state, dispatch] = useReducer(reducer, initialState)
+
   return <Page2Context.Provider value={{state, dispatch}}>
     {props.children}
   </Page2Context.Provider>
