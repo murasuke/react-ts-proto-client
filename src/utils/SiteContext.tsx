@@ -1,24 +1,31 @@
-import React , {useReducer, useContext} from 'react';
+import React, { FC, useReducer } from 'react';
 
-export type Action ={ type: 'CHANGE_PAGE_NAME' | 'CHANGE_USER' , strValue: string, numValue: number }
+export type Action = {
+  type: 'CHANGE_PAGE_NAME' | 'CHANGE_USER';
+  strValue: string;
+  numValue: number;
+};
 export type SiteContextDataType = {
-  pageName: string,
-  userId: number,
-  userName: string,
+  pageName: string;
+  userId: number;
+  userName: string;
 };
 
 const initialState: SiteContextDataType = {
-  pageName: "",
+  pageName: '',
   userId: 123,
-  userName: "user123",
-}
+  userName: 'user123',
+};
 
-function reducer(state:SiteContextDataType,  action: Action) {
+const reducer = (
+  state: SiteContextDataType,
+  action: Action,
+): SiteContextDataType => {
   switch (action.type) {
     case 'CHANGE_PAGE_NAME':
       return {
         ...state,
-        pageName: action.strValue
+        pageName: action.strValue,
       };
     case 'CHANGE_USER':
       return {
@@ -26,21 +33,26 @@ function reducer(state:SiteContextDataType,  action: Action) {
         userId: action.numValue,
         userName: action.strValue,
       };
-    default : 
-      return state
+    default:
+      return state;
   }
-}
+};
 
-export const SiteContext = React.createContext({} as {
-  state: SiteContextDataType
-  dispatch: React.Dispatch<Action>
-});
+export const SiteContext = React.createContext(
+  {} as {
+    state: SiteContextDataType;
+    dispatch: React.Dispatch<Action>;
+  },
+);
 
-export const ContextProvider = (props: any) => {
-  const [state, dispatch] = useReducer(reducer, initialState)
+export const ContextProvider: FC = (props) => {
+  const [state, dispatch] = useReducer(reducer, initialState);
+  const { children } = props;
   console.log('ContextProvider');
 
-  return <SiteContext.Provider value={{state, dispatch}}>
-    {props.children}
-  </SiteContext.Provider>
-}
+  return (
+    <SiteContext.Provider value={{ state, dispatch }}>
+      {children}
+    </SiteContext.Provider>
+  );
+};

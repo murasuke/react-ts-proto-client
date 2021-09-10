@@ -1,4 +1,5 @@
-import React, { useState, useContext } from 'react';
+/* eslint-disable jsx-a11y/label-has-associated-control */
+import React, { VFC, useState, useContext } from 'react';
 import { Page2Context } from './page2Reducer';
 
 export type InputPropsType = {
@@ -7,11 +8,12 @@ export type InputPropsType = {
   message: string;
 };
 
-export const InputComponent1 = (props: InputPropsType) => {
+export const InputComponent1: VFC<InputPropsType> = (props) => {
   const [checked, setChecked] = useState(true);
-  const { state, dispatch } = useContext(Page2Context);
+  const { dispatch } = useContext(Page2Context);
+  const { message: msg, title, id } = props;
 
-  const message = checked ? '' : <> {props.message}</>;
+  const message = checked ? '' : <> {msg}</>;
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setChecked(e.target.value === '1');
@@ -24,12 +26,12 @@ export const InputComponent1 = (props: InputPropsType) => {
 
   return (
     <div style={{ padding: '10px' }}>
-      <h3>{props.title}</h3>
+      <h3>{title}</h3>
       <div>
         <label>
           <input
             type="radio"
-            name={`select_${props.id}`}
+            name={`select_${id}`}
             value="1"
             onChange={handleChange}
           />
@@ -39,7 +41,7 @@ export const InputComponent1 = (props: InputPropsType) => {
         <label>
           <input
             type="radio"
-            name={`select_${props.id}`}
+            name={`select_${id}`}
             value="0"
             onChange={handleChange}
           />
@@ -55,10 +57,11 @@ export const InputComponent1 = (props: InputPropsType) => {
  *
  * @param props
  */
-export function InputComponent2(props: InputPropsType) {
+export const InputComponent2: VFC<InputPropsType> = (props) => {
   const [checked, setChecked] = useState(true);
   const [inputText, setInputText] = useState('');
-  const { state, dispatch } = useContext(Page2Context);
+  const { dispatch } = useContext(Page2Context);
+  const { title, id } = props;
 
   const handleRadioChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setChecked(e.target.value === '1');
@@ -69,7 +72,7 @@ export function InputComponent2(props: InputPropsType) {
     });
     if (e.target.value === '1') {
       setInputText('');
-      dispatch({ type: 'CLEAR_VALUE', name: `text_${props.id}`, value: '' });
+      dispatch({ type: 'CLEAR_VALUE', name: `text_${id}`, value: '' });
     }
   };
 
@@ -89,7 +92,7 @@ export function InputComponent2(props: InputPropsType) {
       {' '}
       <input
         type="text"
-        name={`text_${props.id}`}
+        name={`text_${id}`}
         onChange={handleInputChange}
         value={inputText}
       />{' '}
@@ -98,12 +101,12 @@ export function InputComponent2(props: InputPropsType) {
 
   return (
     <div style={{ padding: '10px' }}>
-      <h3>{props.title}</h3>
+      <h3>{title}</h3>
       <div>
         <label>
           <input
             type="radio"
-            name={`select_${props.id}`}
+            name={`select_${id}`}
             value="1"
             onChange={handleRadioChange}
           />
@@ -113,7 +116,7 @@ export function InputComponent2(props: InputPropsType) {
         <label>
           <input
             type="radio"
-            name={`select_${props.id}`}
+            name={`select_${id}`}
             value="0"
             onChange={handleRadioChange}
           />
@@ -123,4 +126,4 @@ export function InputComponent2(props: InputPropsType) {
       </div>
     </div>
   );
-}
+};

@@ -1,45 +1,38 @@
-import axios from "axios";
+import axios, { AxiosResponse } from 'axios';
 
-async function request( path: string, config={} ){
-    // const url = `${process.env.REACT_APP_API_ORIGIN}${path}`;
-    const response = await axios.get(path, config);
+type PostData = { [index: string]: string };
 
-    return response.data;
-}
+const request = async (path: string, config = {}): Promise<any> => {
+  // const url = `${process.env.REACT_APP_API_ORIGIN}${path}`;
+  const response = await axios.get(path, config);
 
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-return
+  return response.data;
+};
 
-export async function getSearchResults(arg: any = {}){
-    return request(`/search?key=${arg.key}`);
+export const getSearchResults = async (arg: { key: string }): Promise<any> =>
+  request(`/search?key=${arg.key}`);
 
-    // const data = [];
-    // for( let i = 1; i <= 20; i++){
-    //     data.push({id: i, data: `data${i}`});
-    // }
+export const postPage1 = async (
+  postData: PostData,
+): Promise<AxiosResponse<any>> => {
+  const response = await axios.post('page1', postData);
 
-    // const filteredData = [];
-    // for( const item of data){
-    //     if( item.data.includes(arg.key)){
-    //         filteredData.push(item);
-    //     }
-    // }
+  return response;
+};
 
-    // return filteredData;
-}
+export const postPage2 = async (
+  postData: PostData,
+): Promise<AxiosResponse<any>> => {
+  const response = await axios.post('page2', postData);
 
-export async function postPage1( postData: { [index: string]: string}) {
-    const response = await axios.post("page1", postData);
+  return response;
+};
 
-    return response;
-}
+export const postPage3 = async (
+  postData: PostData,
+): Promise<AxiosResponse<any>> => {
+  const response = await axios.post('page3', postData);
 
-export async function postPage2( postData: { [index: string]: string}) {
-    const response = await axios.post("page2", postData);
-
-    return response;
-}
-
-export async function postPage3( postData: { [index: string]: string}) {
-    const response = await axios.post("page3", postData);
-
-    return response;
-}
+  return response;
+};

@@ -1,14 +1,16 @@
-import React , {useReducer, useContext, useEffect} from 'react';
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import Header from "./component/Header";
-import { TopMenu } from "./pages/TopMenu";
-import { Page1 } from "./pages/Page1/Page1";
-import { Page2 } from "./pages/Page2/Page2";
-import { Page3 } from "./pages/Page3/Page3";
-import { ContextProvider,  SiteContext, SiteContextDataType } from './utils/SiteContext';
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+/* eslint-disable react/jsx-props-no-spreading */
+import { VFC, useContext } from 'react';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import Header from './component/Header';
+import TopMenu from './pages/TopMenu';
+import Page1 from './pages/Page1/Page1';
+import Page2 from './pages/Page2/Page2';
+import Page3 from './pages/Page3/Page3';
+import { SiteContext } from './utils/SiteContext';
 import './App.css';
 
-function App() {
+const App: VFC = () => {
   const { state } = useContext(SiteContext);
 
   return (
@@ -27,10 +29,12 @@ function App() {
           <nav className="side-nav">nav</nav>
           <aside className="side-bar">side</aside>
         </div>
-        <footer><h3>footer</h3></footer>
+        <footer>
+          <h3>footer</h3>
+        </footer>
       </div>
     </Router>
   );
-}
+};
 
 export default App;
